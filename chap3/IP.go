@@ -14,10 +14,12 @@ func IP(args []string) {
 	}
 	name := args[0]
 	addr := net.ParseIP(name)
+
 	if addr == nil {
 		fmt.Println("Invalid address")
 	} else {
 		fmt.Println("The address is", addr)
 	}
+
 	os.Exit(0)
 }

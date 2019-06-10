@@ -27,6 +27,8 @@ func main() {
 		chap3.LookUpHost(args)
 	case "LookUpPort":
 		chap3.LookUpPort(args)
+	case "ResolveTCPAddr":
+		chap3.ResolveTCPAddr(args)
 	default:
 		fmt.Fprintln(os.Stderr, "No", name, "available")
 	}
