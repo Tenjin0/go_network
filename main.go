@@ -29,6 +29,16 @@ func main() {
 		chap3.LookUpPort(args)
 	case "ResolveTCPAddr":
 		chap3.ResolveTCPAddr(args)
+	case "GetHeadInfo":
+		chap3.GetHeadInfo(args)
+	case "DayTimeServer":
+		chap3.DayTimeServer()
+	case "EchoServer":
+		chap3.EchoServer()
+	case "UDPDayTimeClient":
+		chap3.UDPDayTimeClient(args)
+	case "UDPDayTimeServer":
+		chap3.UDPDayTimeServer()
 	default:
 		fmt.Fprintln(os.Stderr, "No", name, "available")
 	}
