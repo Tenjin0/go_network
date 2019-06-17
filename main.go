@@ -39,6 +39,10 @@ func main() {
 		chap3.UDPDayTimeClient(args)
 	case "UDPDayTimeServer":
 		chap3.UDPDayTimeServer()
+	case "IPGetHeadInfo":
+		chap3.IPGetHeadInfo(args)
+	case "ThreadedIPEchoServer":
+		chap3.ThreadedIPEchoServer()
 	default:
 		fmt.Fprintln(os.Stderr, "No", name, "available")
 	}

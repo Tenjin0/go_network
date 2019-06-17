@@ -8,7 +8,8 @@ import (
 func handleClient(conn net.Conn) {
 
 	defer conn.Close()
-	var buf [2]byte
+
+	var buf [512]byte
 
 	for {
 		n, err := conn.Read(buf[0:])

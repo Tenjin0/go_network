@@ -12,11 +12,12 @@ func readFully(conn net.Conn) ([]byte, error) {
 	defer conn.Close()
 
 	result := bytes.NewBuffer(nil)
-	var buf [512]byte
-
+	var buf [100]byte
 	for {
 		n, err := conn.Read(buf[0:])
+
 		result.Write(buf[0:n])
+
 		if err != nil {
 			if err == io.EOF {
 				break
@@ -43,5 +44,9 @@ func IPGetHeadInfo(args []string) {
 	checkError(err, 3)
 
 	result, err := readFully(conn)
+	checkError(err, 4)
 
+	fmt.Println(string(result))
+
+	os.Exit(0)
 }
