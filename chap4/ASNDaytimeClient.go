@@ -2,10 +2,12 @@ package chap4
 
 import (
 	"bytes"
+	"encoding/asn1"
 	"fmt"
 	"io"
 	"net"
 	"os"
+	"time"
 )
 
 func readFully(conn net.Conn) ([]byte, error) {
@@ -42,5 +44,13 @@ func ASNDaytimeClient(args []string) {
 	result, err := readFully(conn)
 	checkError(err, 2)
 
-	fmt.Println(result)
+	var newTime time.Time
+
+	_, err = asn1.Unmarshal(result, &newTime)
+
+	checkError(err, 3)
+
+	fmt.Println(newTime)
+
+	os.Exit(0)
 }
