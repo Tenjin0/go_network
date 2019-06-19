@@ -1,4 +1,4 @@
-package main
+package chap3
 
 import (
 	"fmt"
@@ -6,6 +6,7 @@ import (
 	"path/filepath"
 
 	"github.com/Tenjin0/go_network/chap3"
+	"github.com/Tenjin0/go_network/chap4"
 )
 
 func main() {
@@ -43,6 +44,10 @@ func main() {
 		chap3.IPGetHeadInfo(args)
 	case "ThreadedIPEchoServer":
 		chap3.ThreadedIPEchoServer()
+	case "AsnDayTimeServer":
+		chap4.DaytimeServer()
+	case "AsnDayTimeClient":
+		chap4.ASNDaytimeClient(args)
 	default:
 		fmt.Fprintln(os.Stderr, "No", name, "available")
 	}
