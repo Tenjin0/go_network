@@ -50,6 +50,8 @@ func main() {
 		chap4.ASNDaytimeClient(args)
 	case "SaveJSON":
 		chap4.SaveJSON(args)
+	case "LoadJSON":
+		chap4.LoadJSON(args)
 	default:
 		fmt.Fprintln(os.Stderr, "No", name, "available")
 	}
