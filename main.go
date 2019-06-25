@@ -52,6 +52,18 @@ func main() {
 		chap4.SaveJSON(args)
 	case "LoadJSON":
 		chap4.LoadJSON(args)
+	case "EchoJSONClient":
+		chap4.EchoJSONClient(args)
+	case "EchoJSONServer":
+		chap4.EchoJSONServer()
+	case "LoadGob":
+		chap4.LoadGob()
+	case "SaveGob":
+		chap4.SaveGob()
+	case "EchoGobClient":
+		chap4.EchoGobClient(args)
+	case "EchoGobServer":
+		chap4.EchoGobServer()
 	default:
 		fmt.Fprintln(os.Stderr, "No", name, "available")
 	}

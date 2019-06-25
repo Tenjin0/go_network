@@ -7,13 +7,9 @@ import (
 	"os"
 )
 
-func EchoClient(args []string) {
+func GetPerson() Person {
 
-	if len(args) != 1 {
-		fmt.Println("Usage: go run main.go EchoClient host:port")
-	}
-
-	person := Person{
+	return Person{
 		Name: Name{
 			Family:   "Petit",
 			Personal: "Patrice",
@@ -29,6 +25,16 @@ func EchoClient(args []string) {
 			},
 		},
 	}
+}
+
+func EchoJSONClient(args []string) {
+
+	if len(args) != 1 {
+		fmt.Println("Usage: go run main.go EchoClient host:port")
+		os.Exit(1)
+	}
+
+	person := GetPerson()
 
 	service := args[0]
 
@@ -38,16 +44,12 @@ func EchoClient(args []string) {
 	encoder := json.NewEncoder(conn)
 	decoder := json.NewDecoder(conn)
 
-	for n := 0; n < 10; n++ {
+	encoder.Encode(person)
+	var newPerson Person
 
-		encoder.Encode(person)
-		var newPerson Person
+	decoder.Decode(&newPerson)
 
-		decoder.Decode(&newPerson)
-
-		fmt.Println(newPerson.String())
-
-	}
+	fmt.Println(newPerson.String())
 
 	conn.Close()
 
