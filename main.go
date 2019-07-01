@@ -66,6 +66,8 @@ func main() {
 		chap4.EchoGobServer()
 	case "Base64":
 		chap4.Base64()
+	case "ProtocolBuffer":
+		chap4.ProtocolBuffer()
 	default:
 		fmt.Fprintln(os.Stderr, "No", name, "available")
 	}
