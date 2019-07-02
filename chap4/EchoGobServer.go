@@ -1,5 +1,4 @@
-package chap4
-
+package main
 import (
 	"encoding/gob"
 	"fmt"

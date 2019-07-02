@@ -1,5 +1,4 @@
-package chap3
-
+package main
 import (
 	"fmt"
 	"io/ioutil"
