@@ -1,4 +1,4 @@
-package chap5
+package main
 
 import (
 	"fmt"
@@ -38,10 +38,29 @@ func handleClient(conn net.Conn) {
 		if s[0:2] == CD {
 
 		} else if s[0:3] == DIR {
-
+			chdir(conn, s[3:])
 		} else if s[0:3] == PWD {
-
+			pwd(conn)
 		}
+	}
+}
+
+func pwd(conn net.Conn) {
+
+	s, err := os.Getwd()
+	if err != nil {
+		conn.Write([]byte(""))
+		return
+	}
+	conn.Write([]byte(s))
+}
+
+func chdir(conn net.Conn, s string) {
+
+	if os.Chdir(s) == nil {
+		conn.Write([]byte("OK"))
+	} else {
+		conn.Write([]byte("ERROR"))
 	}
 }
 
