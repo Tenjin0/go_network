@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-func main() {
+func FTPClient() {
 
 	if len(os.Args) != 2 {
 		fmt.Println("Usage: ", os.Args[0], "host")
@@ -17,7 +17,7 @@ func main() {
 
 	host := os.Args[1]
 
-	conn, err := net.Dial("tcp", host+":1202")
+	_, err := net.Dial("tcp", host+":1202")
 	checkError(err)
 
 	reader := bufio.NewReader(os.Stdin)

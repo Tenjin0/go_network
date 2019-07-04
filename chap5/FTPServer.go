@@ -36,9 +36,9 @@ func handleClient(conn net.Conn) {
 		s := string(buf[0:n])
 
 		if s[0:2] == CD {
-
-		} else if s[0:3] == DIR {
 			chdir(conn, s[3:])
+		} else if s[0:3] == DIR {
+			dirList(conn)
 		} else if s[0:3] == PWD {
 			pwd(conn)
 		}
@@ -62,6 +62,14 @@ func chdir(conn net.Conn, s string) {
 	} else {
 		conn.Write([]byte("ERROR"))
 	}
+}
+
+func dirList(conn net.Conn) {
+
+	// dir, err := os.Open(".")
+	// if err != nil {
+
+	// }
 }
 
 func FTPServer() {
