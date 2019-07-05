@@ -8,15 +8,14 @@ import (
 	"strings"
 )
 
-func FTPClient() {
+func FTPClient(args []string) {
 
-	if len(os.Args) != 2 {
-		fmt.Println("Usage: ", os.Args[0], "host")
+	if len(args) != 2 {
+		fmt.Println("Usage: ", args[0], "host")
 		os.Exit(1)
 	}
 
-	host := os.Args[1]
-
+	host := args[0]
 	_, err := net.Dial("tcp", host+":1202")
 	checkError(err)
 
@@ -31,5 +30,7 @@ func FTPClient() {
 
 		// lise trailing whitespace
 		line = strings.TrimRight(line, " \t\r\n")
+		fmt.Println(line)
+
 	}
 }

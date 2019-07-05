@@ -35,11 +35,11 @@ func handleClient(conn net.Conn) {
 
 		s := string(buf[0:n])
 
-		if s[0:2] == CD {
+		if len(s) >= 2 && s[0:2] == CD {
 			chdir(conn, s[3:])
-		} else if s[0:3] == DIR {
+		} else if len(s) >= 3 && s[0:3] == DIR {
 			dirList(conn)
-		} else if s[0:3] == PWD {
+		} else if len(s) >= 3 && s[0:3] == PWD {
 			pwd(conn)
 		}
 	}
@@ -78,6 +78,8 @@ func FTPServer() {
 	tcpAddr, err := net.ResolveTCPAddr("tcp", service)
 	checkError(err)
 	listener, err := net.ListenTCP("tcp", tcpAddr)
+
+	fmt.Println("Listen on", tcpAddr)
 
 	for {
 		conn, err := listener.Accept()
