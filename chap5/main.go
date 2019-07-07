@@ -13,13 +13,13 @@ func main() {
 		os.Exit(1)
 	} else {
 		name := os.Args[1]
-		args := os.Args[2:]
+		// args := os.Args[2:]
 
 		switch name {
 		case "FTPServer":
 			FTPServer()
 		case "FTPClient":
-			FTPClient(args)
+			FTPClient()
 		default:
 			fmt.Fprintln(os.Stderr, "No", name, "available")
 		}
