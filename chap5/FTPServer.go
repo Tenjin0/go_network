@@ -83,6 +83,8 @@ func FTPServer() {
 
 	for {
 		conn, err := listener.Accept()
+
+		fmt.Println(conn.LocalAddr())
 		if err != nil {
 			continue
 		}
