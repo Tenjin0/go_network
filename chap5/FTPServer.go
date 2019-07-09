@@ -66,10 +66,22 @@ func chdir(conn net.Conn, s string) {
 
 func dirList(conn net.Conn) {
 
-	// dir, err := os.Open(".")
-	// if err != nil {
+	defer conn.Write([]byte("\r\n"))
 
-	// }
+	dir, err := os.Open(".")
+	if err != nil {
+		return
+	}
+
+	names, err := dir.Readdirnames(-1)
+
+	if err != nil {
+		return
+	}
+
+	for _, nm := range names {
+		conn.Write([]byte(nm + "\r\n"))
+	}
 }
 
 func FTPServer() {
