@@ -47,6 +47,11 @@ func dirRequest(conn net.Conn) {
 
 }
 
+func cdRequest(conn net.Conn) {
+
+	conn.Write([]byte(CD))
+}
+
 func FTPClient() {
 
 	host := "localhost"
@@ -61,15 +66,18 @@ func FTPClient() {
 			break
 		}
 
-		// lise trailing whitespace
-		line = strings.TrimRight(line, " \t\r\n")
+		line = strings.TrimRight(line, " \t")
 		strs := strings.SplitN(line, " ", 2)
-
+		i := strings.Index(line, "\n")
+		fmt.Println(i)
+		conn.Write([]byte(line))
 		switch strs[0] {
 		case uiPwd:
 			pwdRequest(conn)
 		case uiDir:
 			dirRequest(conn)
+		case uiCd:
+			cdRequest(conn)
 		case uiQuit:
 			conn.Close()
 			os.Exit(0)

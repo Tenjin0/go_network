@@ -1,9 +1,11 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
 	"net"
 	"os"
+	"strings"
 )
 
 const (
@@ -24,22 +26,34 @@ func handleClient(conn net.Conn) {
 	defer conn.Close()
 
 	var buf [512]byte
+	result := bytes.NewBuffer(nil)
+
+	fmt.Println("handleClient")
 
 	for {
-
+		fmt.Println("for")
 		n, err := conn.Read(buf[0:])
+
 		if err != nil {
+			fmt.Println("find an error")
 			conn.Close()
 			return
 		}
 
-		s := string(buf[0:n])
+		result.Write(buf[0:n])
 
-		if len(s) >= 2 && s[0:2] == CD {
-			chdir(conn, s[3:])
-		} else if len(s) >= 3 && s[0:3] == DIR {
+		contents := string(result.Bytes())
+		i := strings.Index(contents, "\n")
+		if i >= 0 {
+			result.Reset()
+		}
+		fmt.Println(n, i, contents)
+
+		if len(contents) >= 2 && contents[0:2] == CD {
+			chdir(conn, contents[3:])
+		} else if len(contents) >= 3 && contents[0:3] == DIR {
 			dirList(conn)
-		} else if len(s) >= 3 && s[0:3] == PWD {
+		} else if len(contents) >= 3 && contents[0:3] == PWD {
 			pwd(conn)
 		}
 	}
