@@ -18,10 +18,11 @@ const (
 
 func pwdRequest(conn net.Conn) {
 
-	conn.Write([]byte(PWD))
+	conn.Write([]byte(PWD + "\n"))
 
 	var response [512]byte
 	n, _ := conn.Read(response[0:])
+	fmt.Println(n)
 	s := string(response[0:n])
 	fmt.Println("Current dir \"" + s + "\"")
 }
@@ -68,10 +69,8 @@ func FTPClient() {
 
 		line = strings.TrimRight(line, " \t")
 		strs := strings.SplitN(line, " ", 2)
-		i := strings.Index(line, "\n")
-		fmt.Println(i)
-		conn.Write([]byte(line))
-		switch strs[0] {
+
+		switch strings.TrimRight(strs[0], " \t\r\n") {
 		case uiPwd:
 			pwdRequest(conn)
 		case uiDir:

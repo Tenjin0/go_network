@@ -31,11 +31,10 @@ func handleClient(conn net.Conn) {
 	fmt.Println("handleClient")
 
 	for {
-		fmt.Println("for")
 		n, err := conn.Read(buf[0:])
 
 		if err != nil {
-			fmt.Println("find an error")
+			fmt.Println("find an error", err.Error())
 			conn.Close()
 			return
 		}
@@ -43,25 +42,26 @@ func handleClient(conn net.Conn) {
 		result.Write(buf[0:n])
 
 		contents := string(result.Bytes())
+
 		i := strings.Index(contents, "\n")
+
 		if i >= 0 {
 			result.Reset()
+			if len(contents) >= 2 && strings.ToUpper(contents[0:2]) == CD {
+				chdir(conn, contents[3:])
+			} else if len(contents) >= 3 && strings.ToUpper(contents[0:3]) == DIR {
+				dirList(conn)
+			} else if len(contents) >= 3 && strings.ToUpper(contents[0:3]) == PWD {
+				pwd(conn)
+			}
 		}
-		fmt.Println(n, i, contents)
 
-		if len(contents) >= 2 && contents[0:2] == CD {
-			chdir(conn, contents[3:])
-		} else if len(contents) >= 3 && contents[0:3] == DIR {
-			dirList(conn)
-		} else if len(contents) >= 3 && contents[0:3] == PWD {
-			pwd(conn)
-		}
 	}
 }
 
 func pwd(conn net.Conn) {
-
 	s, err := os.Getwd()
+	fmt.Println(s)
 	if err != nil {
 		conn.Write([]byte(""))
 		return
