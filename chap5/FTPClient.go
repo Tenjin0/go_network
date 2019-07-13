@@ -22,14 +22,13 @@ func pwdRequest(conn net.Conn) {
 
 	var response [512]byte
 	n, _ := conn.Read(response[0:])
-	fmt.Println(n)
 	s := string(response[0:n])
 	fmt.Println("Current dir \"" + s + "\"")
 }
 
 func dirRequest(conn net.Conn) {
 
-	conn.Write([]byte(DIR))
+	conn.Write([]byte(DIR + "\n"))
 
 	var buf [512]byte
 
@@ -48,9 +47,16 @@ func dirRequest(conn net.Conn) {
 
 }
 
-func cdRequest(conn net.Conn) {
+func cdRequest(conn net.Conn, path string) {
 
-	conn.Write([]byte(CD))
+	conn.Write([]byte(CD + " " + path + "\n"))
+
+	var response [512]byte
+	n, _ := conn.Read(response[0:])
+
+	s := string(response[0:n])
+
+	fmt.Println("change dir", s)
 }
 
 func FTPClient() {
@@ -76,7 +82,7 @@ func FTPClient() {
 		case uiDir:
 			dirRequest(conn)
 		case uiCd:
-			cdRequest(conn)
+			cdRequest(conn, strs[1])
 		case uiQuit:
 			conn.Close()
 			os.Exit(0)

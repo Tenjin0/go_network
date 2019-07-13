@@ -48,6 +48,7 @@ func handleClient(conn net.Conn) {
 		if i >= 0 {
 			result.Reset()
 			if len(contents) >= 2 && strings.ToUpper(contents[0:2]) == CD {
+				fmt.Println(contents, contents[3:])
 				chdir(conn, contents[3:])
 			} else if len(contents) >= 3 && strings.ToUpper(contents[0:3]) == DIR {
 				dirList(conn)
@@ -61,7 +62,7 @@ func handleClient(conn net.Conn) {
 
 func pwd(conn net.Conn) {
 	s, err := os.Getwd()
-	fmt.Println(s)
+
 	if err != nil {
 		conn.Write([]byte(""))
 		return
@@ -70,8 +71,9 @@ func pwd(conn net.Conn) {
 }
 
 func chdir(conn net.Conn, s string) {
+	tmp := strings.Trim(s, " \n\r\t")
 
-	if os.Chdir(s) == nil {
+	if os.Chdir(tmp) == nil {
 		conn.Write([]byte("OK"))
 	} else {
 		conn.Write([]byte("ERROR"))
