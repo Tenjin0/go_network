@@ -20,6 +20,10 @@ func main() {
 			FTPServer()
 		case "FTPClient":
 			FTPClient()
+		case "Encoding":
+			Encoding()
+		case "UTF16Encoding":
+			UTF16Encoding()
 		default:
 			fmt.Fprintln(os.Stderr, "No", name, "available")
 		}
