@@ -5,8 +5,6 @@ import (
 	"unicode/utf16"
 )
 
-const BOM = '\ufffe'
-
 func writeShorts(conn net.Conn, shorts []uint16) {
 
 	var bytes [2]byte

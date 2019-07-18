@@ -13,7 +13,7 @@ func main() {
 		os.Exit(1)
 	} else {
 		name := os.Args[1]
-		// args := os.Args[2:]
+		args := os.Args[2:]
 
 		switch name {
 		case "FTPServer":
@@ -22,6 +22,10 @@ func main() {
 			FTPClient()
 		case "Encoding":
 			Encoding()
+		case "UTF16Client":
+			UTF16Client(args)
+		case "UTF16Server":
+			UTF16Server()
 		case "UTF16Encoding":
 			UTF16Encoding()
 		default:
