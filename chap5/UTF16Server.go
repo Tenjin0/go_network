@@ -31,7 +31,7 @@ func writeShorts(conn net.Conn, shorts []uint16) {
 
 func UTF16Server() {
 
-	service := "0.0.0.:1210"
+	service := "0.0.0.0:1210"
 	tcpAddr, err := net.ResolveTCPAddr("tcp", service)
 	checkError(err)
 

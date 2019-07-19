@@ -13,11 +13,37 @@ func readShorts(conn net.Conn) ([]uint16, error) {
 
 	var buf [512]byte
 
-	_, err := conn.Read(buf[0:2])
+	n, err := conn.Read(buf[0:2])
 
 	if err != nil {
 		return make([]uint16, 0), err // []uint16{}
 	}
+
+	for {
+		m, err := conn.Read(buf[n:])
+		if m == 0 || err != nil {
+			fmt.Println(m, err)
+			break
+		}
+		n += m
+	}
+
+	checkError(err)
+
+	fmt.Println(buf)
+
+	var shorts []uint16
+
+	shorts = make([]uint16, n/2)
+
+	if buf[0] == 0xff && buf[1] == 0xfe {
+		// big endian
+
+	} else if buf[0] == 0xfe && buf[1] == 0xff {
+		// little endian
+	}
+
+	fmt.Println(shorts)
 
 	return []uint16{}, nil
 
