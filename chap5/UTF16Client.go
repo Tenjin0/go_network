@@ -38,14 +38,23 @@ func readShorts(conn net.Conn) ([]uint16, error) {
 
 	if buf[0] == 0xff && buf[1] == 0xfe {
 		// big endian
+		for i := 2; i < n; i += 2 {
+			shorts[i/2-1] = uint16(buf[i])<<8 + uint16(buf[i+1])
+		}
 
 	} else if buf[0] == 0xfe && buf[1] == 0xff {
 		// little endian
+		for i := 0; i < n; i += 2 {
+			shorts[i/2-1] = uint16(buf[i+1])<<8 + uint16(buf[i])
+		}
+	} else {
+		// unknow byte order
+		return []uint16{}, new Error
 	}
 
 	fmt.Println(shorts)
 
-	return []uint16{}, nil
+	return shorts, nil
 
 }
 

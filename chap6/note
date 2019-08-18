@@ -1,0 +1,6 @@
+AES Encrypt/Decrypt string https://gist.github.com/manishtpatel/8222606
+https://github.com/lightsocks/lightsocks-go/blob/master/src/crypt.go
+https://gist.github.com/mkozjak/fe212c2bc62ac4c96aa8c12b108871b9
+
+change ENV_FOLDER to chap6 in .ENV_FOLDER
+make run <arg1>? target=<Function> 
