@@ -29,6 +29,8 @@ func main() {
 			UTF16Server()
 		case "UTF16Encoding":
 			UTF16Encoding()
+		case "Unicode":
+			Unicode()
 		default:
 			fmt.Fprintln(os.Stderr, "No", name, "available")
 		}
