@@ -28,6 +28,8 @@ func main() {
 			MD5Hash(args[0])
 		case "RSAKeys":
 			GenRSAKeys()
+		case "X509Cert":
+			GenX509Cert()
 		case "LoadRSAKeys":
 			LoadRSAKeys()
 		case "Aes":
