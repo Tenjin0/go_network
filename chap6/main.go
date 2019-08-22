@@ -32,6 +32,8 @@ func main() {
 			GenX509Cert()
 		case "LoadRSAKeys":
 			LoadRSAKeys()
+		case "LoadX509Cert":
+			LoadX509Cert()
 		case "Aes":
 			key := "example key 1234"
 

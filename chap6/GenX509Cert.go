@@ -6,10 +6,31 @@ import (
 	"crypto/x509"
 	"crypto/x509/pkix"
 	"encoding/pem"
+	"fmt"
 	"math/big"
 	"os"
 	"time"
 )
+
+func LoadX509Cert() {
+
+	certCerFile, err := os.Open("certs/patrice.petit.name.cer")
+	checkError(err)
+
+	derBytes := make([]byte, 1000)
+	count, err := certCerFile.Read(derBytes)
+
+	checkError(err)
+	certCerFile.Close()
+
+	cert, err := x509.ParseCertificate(derBytes[0:count])
+	checkError(err)
+
+	fmt.Printf("Name %s\n", cert.Subject)
+	fmt.Printf("Not Before %s\n", cert.NotBefore.String())
+	fmt.Printf("Not After %s\n", cert.NotAfter.String())
+
+}
 
 func GenX509Cert() {
 
@@ -24,6 +45,7 @@ func GenX509Cert() {
 	template := x509.Certificate{
 		SerialNumber: big.NewInt(2019),
 		Subject: pkix.Name{
+			CommonName:    "patrice.petit.name",
 			Organization:  []string{"Company, INC."},
 			Country:       []string{"FR"},
 			Province:      []string{""},
