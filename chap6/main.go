@@ -6,13 +6,6 @@ import (
 	"path/filepath"
 )
 
-func checkError(err error) {
-	if err != nil {
-		fmt.Println("Fatal error:", err.Error())
-		os.Exit(1)
-	}
-}
-
 func main() {
 	if len(os.Args) < 2 {
 
@@ -24,35 +17,16 @@ func main() {
 		args := os.Args[2:]
 
 		switch name {
-		case "MD5Hash":
-			MD5Hash(args[0])
-		case "RSAKeys":
-			GenRSAKeys()
-		case "X509Cert":
-			GenX509Cert()
-		case "LoadRSAKeys":
-			LoadRSAKeys()
-		case "LoadX509Cert":
-			LoadX509Cert()
-		case "Aes":
-			key := "example key 1234"
-
-			cryptoText, err := Encrypt(key, args[0])
-			fmt.Println("Encrypt", cryptoText)
-
-			if err != nil {
-				fmt.Println(err.Error())
-				os.Exit(1)
-			}
-
-			// encrypt base64 crypto to original value
-			text, err := Decrypt(key, cryptoText)
-
-			if err != nil {
-				fmt.Println(err.Error())
-				os.Exit(1)
-			}
-			fmt.Println("Decrypt", string(text))
+		case "Encoding":
+			Encoding()
+		case "UTF16Client":
+			UTF16Client(args)
+		case "UTF16Server":
+			UTF16Server()
+		case "UTF16Encoding":
+			UTF16Encoding()
+		case "Unicode":
+			Unicode()
 		default:
 			fmt.Fprintln(os.Stderr, "No", name, "available")
 		}
