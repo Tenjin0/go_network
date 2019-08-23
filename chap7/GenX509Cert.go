@@ -64,6 +64,7 @@ func GenX509Cert() {
 		DNSNames: []string{
 			"patrice.petit.name",
 			"localhost",
+			"0.0.0.0",
 		},
 	}
 
