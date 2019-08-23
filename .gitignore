@@ -2,3 +2,4 @@
 *.gob
 *.json
 certs
+vendor
