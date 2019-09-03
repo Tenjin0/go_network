@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"net"
 	"os"
@@ -49,7 +50,8 @@ func readShorts(conn net.Conn) ([]uint16, error) {
 		}
 	} else {
 		// unknow byte order
-		return []uint16{}, new Error
+		return []uint16{}, errors.New("Unkown byte order")
+
 	}
 
 	fmt.Println(shorts)
