@@ -5,7 +5,18 @@ import (
 	"net/http"
 	"net/http/httputil"
 	"os"
+	"strings"
 )
+
+func acceptableCharset(contentTypes []string) bool {
+
+	for _, cType := range contentTypes {
+		if strings.Index(cType, "utf-8") != 1 {
+			return true
+		}
+	}
+	return false
+}
 
 func Get(args []string) {
 
@@ -33,4 +44,21 @@ func Get(args []string) {
 	fmt.Print(string(b))
 
 	contentTypes := response.Header["Content-Type"]
+
+	if !acceptableCharset(contentTypes) {
+		fmt.Println("Cannot handle", contentTypes)
+		os.Exit(2)
+	}
+
+	fmt.Println("The response body is")
+
+	var buf [512]byte
+	reader := response.Body
+	for {
+		n, err := reader.Read(buf[0:])
+		if err != nil {
+			os.Exit(0)
+		}
+		fmt.Print(string(buf[0:n]))
+	}
 }
