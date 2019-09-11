@@ -14,6 +14,7 @@ func checkError(err error) {
 }
 
 func main() {
+
 	if len(os.Args) < 2 {
 
 		fmt.Fprintf(os.Stderr, "Usage: %s \"function\" ...args\n", filepath.Base(os.Args[0]))

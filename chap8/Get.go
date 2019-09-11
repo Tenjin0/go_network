@@ -31,7 +31,6 @@ func Get(args []string) {
 
 	if err != nil {
 		fmt.Println(err.Error())
-		os.Exit(2)
 	}
 
 	if response.StatusCode != 200 {
@@ -40,25 +39,30 @@ func Get(args []string) {
 	}
 
 	fmt.Println("The response header is")
+
 	b, _ := httputil.DumpResponse(response, false)
+
 	fmt.Print(string(b))
 
 	contentTypes := response.Header["Content-Type"]
 
 	if !acceptableCharset(contentTypes) {
-		fmt.Println("Cannot handle", contentTypes)
-		os.Exit(2)
+		fmt.Println("Cannnot handle", contentTypes)
+		os.Exit(4)
 	}
 
 	fmt.Println("The response body is")
 
 	var buf [512]byte
 	reader := response.Body
+
 	for {
 		n, err := reader.Read(buf[0:])
-		if err != nil {
-			os.Exit(0)
-		}
 		fmt.Print(string(buf[0:n]))
+		if err != nil {
+			break
+		}
+		// fmt.Println(n)
+		// fmt.Print(string(buf[0:n]))
 	}
 }

@@ -29,6 +29,8 @@ func main() {
 			Head(args)
 		case "Get":
 			Get(args)
+		case "ClientGet":
+			ClientGet(args)
 			return
 		default:
 			fmt.Fprintln(os.Stderr, "No", name, "available")
