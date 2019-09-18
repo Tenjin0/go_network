@@ -31,6 +31,8 @@ func main() {
 			Get(args)
 		case "ClientGet":
 			ClientGet(args)
+		case "ProxyGet":
+			ProxyGet(args)
 			return
 		default:
 			fmt.Fprintln(os.Stderr, "No", name, "available")
