@@ -62,7 +62,5 @@ func Get(args []string) {
 		if err != nil {
 			break
 		}
-		// fmt.Println(n)
-		// fmt.Print(string(buf[0:n]))
 	}
 }
