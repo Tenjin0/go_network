@@ -29,4 +29,37 @@ func TLSUnsafeClientGet(args []string) {
 
 	request, err := http.NewRequest("GET", url.String(), nil)
 	checkError(err)
+
+	response, err := client.Do(request)
+	checkError(err)
+
+	if response.StatusCode != 200 {
+		fmt.Println(response.Status)
+		os.Exit(2)
+	}
+
+	fmt.Println("get a response")
+
+	chSet := getCharset(response)
+	fmt.Printf("got charset %S\n", chSet)
+
+	if chSet != "UTF-8" {
+		fmt.Printf("Cannot handle", chSet)
+		os.Exit(4)
+	}
+
+	var buf [512]byte
+
+	reader := response.Body
+
+	fmt.Println("got body")
+
+	for {
+		n, err := reader.Read(buf[0:])
+		if err != nil {
+			os.Exit(0)
+		}
+		fmt.Print(string(buf[0:n]))
+	}
+
 }

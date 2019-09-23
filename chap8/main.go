@@ -33,6 +33,8 @@ func main() {
 			ClientGet(args)
 		case "ProxyGet":
 			ProxyGet(args)
+		case "FileServer":
+			FileServer()
 			return
 		default:
 			fmt.Fprintln(os.Stderr, "No", name, "available")
