@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"strings"
 )
 
 func TLSUnsafeClientGet(args []string) {
@@ -41,10 +42,10 @@ func TLSUnsafeClientGet(args []string) {
 	fmt.Println("get a response")
 
 	chSet := getCharset(response)
-	fmt.Printf("got charset %S\n", chSet)
+	fmt.Printf("got charset %s\n", chSet)
 
-	if chSet != "UTF-8" {
-		fmt.Printf("Cannot handle", chSet)
+	if strings.ToUpper(chSet) != "UTF-8" {
+		fmt.Println("Cannot handle", chSet)
 		os.Exit(4)
 	}
 
@@ -56,10 +57,10 @@ func TLSUnsafeClientGet(args []string) {
 
 	for {
 		n, err := reader.Read(buf[0:])
+		fmt.Print(string(buf[0:n]))
 		if err != nil {
 			os.Exit(0)
 		}
-		fmt.Print(string(buf[0:n]))
 	}
 
 }

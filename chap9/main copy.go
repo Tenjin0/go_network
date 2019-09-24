@@ -23,24 +23,10 @@ func main() {
 	} else {
 
 		name := os.Args[1]
-		args := os.Args[2:]
+		// args := os.Args[2:]
 		switch name {
 		case "Head":
-			Head(args)
-		case "Get":
-			Get(args)
-		case "ClientGet":
-			ClientGet(args)
-		case "ProxyGet":
-			ProxyGet(args)
-		case "FileServer":
-			FileServer()
-		case "PrintEnv":
-			PrintEnv()
-		case "HttpsFileServer":
-			HttpsFileServer()
-		case "TLSUnsafeClientGet":
-			TLSUnsafeClientGet(args)
+			// Head(args)
 		default:
 			fmt.Fprintln(os.Stderr, "No", name, "available")
 		}
