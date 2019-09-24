@@ -35,6 +35,8 @@ func main() {
 			ProxyGet(args)
 		case "FileServer":
 			FileServer()
+		case "PrintEnv":
+			PrintEnv()
 			return
 		default:
 			fmt.Fprintln(os.Stderr, "No", name, "available")
