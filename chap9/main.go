@@ -25,8 +25,8 @@ func main() {
 		name := os.Args[1]
 		// args := os.Args[2:]
 		switch name {
-		case "Head":
-			// Head(args)
+		case "PrintPerson":
+			PrintPerson()
 		default:
 			fmt.Fprintln(os.Stderr, "No", name, "available")
 		}
