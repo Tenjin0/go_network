@@ -27,6 +27,10 @@ func main() {
 		switch name {
 		case "PrintPerson":
 			PrintPerson()
+		case "PrintEmails":
+			PrintEmails()
+		case "PrintNameEmails":
+			PrintNameEmails()
 		default:
 			fmt.Fprintln(os.Stderr, "No", name, "available")
 		}

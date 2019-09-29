@@ -5,33 +5,33 @@ import (
 	"text/template"
 )
 
-type Person struct {
-	Name   string
-	Age    int
-	Emails []string
-	Jobs   []*Job
-}
-
-type Job struct {
-	Employer string
-	Role     string
-}
-
-const templ = `The name is {{.Name}}.
-The age is {{.Age -}}.
-{{- range .Emails }}
-    An Email is {{. -}}
-{{end}}
-The Jobs are:
-{{with .Jobs -}}
-{{range .}}
-    An employer is {{.Employer}}
-    and the role is {{.Role}}
-{{end -}}
-{{end -}}
-`
-
 func PrintPerson() {
+
+	type Job struct {
+		Employer string
+		Role     string
+	}
+
+	type Person struct {
+		Name   string
+		Age    int
+		Emails []string
+		Jobs   []*Job
+	}
+
+	const templ = `The name is {{.Name}}.
+	The age is {{.Age -}}.
+	{{- range .Emails }}
+		An Email is {{. -}}
+	{{end}}
+	The Jobs are:
+	{{with .Jobs -}}
+	{{range .}}
+		An employer is {{.Employer}}
+		and the role is {{.Role}}
+	{{end -}}
+	{{end -}}
+	`
 
 	job1 := Job{
 		Employer: "Box Hill institute",
