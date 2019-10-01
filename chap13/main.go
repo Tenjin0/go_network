@@ -15,8 +15,8 @@ func checkError(err error) {
 
 func main() {
 
-	if len(os.Args) != 2 {
-		fmt.Println("Usage: go run main.go Server/Client")
+	if len(os.Args) <= 1 {
+		fmt.Println("Usage: go run main.go Server/Client host?")
 	}
 
 	switch os.Args[1] {
@@ -31,6 +31,12 @@ func main() {
 		break
 	case "TCPClient":
 		TCPArithClient(os.Args[1:])
+		break
+	case "JSONServer":
+		JSONArithServer()
+		break
+	case "JSONClient":
+		JSONArithClient(os.Args[1:])
 		break
 	default:
 		log.Fatal("No registered service", os.Args[1])
